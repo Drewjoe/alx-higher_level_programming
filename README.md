@@ -2,7 +2,7 @@
 
 This is a step further into ALX SE program and an introduction to python.
 
-__## About ##__
+## About ##
 
 This section revolves around the following objectives.
 
@@ -38,4 +38,4 @@ __C Scripts__
 - No use of global variables
 - No more than 5 functions per file
 
-** Pycodestyle is now the new standard of Python style code **
+**Pycodestyle is now the new standard of Python style code**
