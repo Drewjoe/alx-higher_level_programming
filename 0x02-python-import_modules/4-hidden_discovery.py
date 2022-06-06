@@ -2,6 +2,7 @@
 import hidden_4
 
 if __name__ == "__main__":
+    main()
 
     s = dir(hidden_4)
     for i in range(len(s)):
