@@ -8,5 +8,6 @@ def main():
         if(s[i][0] != '__'):
             print(f"{s[i]}")
 
+
 if __name__ == "__main__":
     main()
