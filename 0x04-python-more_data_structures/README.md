@@ -27,7 +27,9 @@ It is expected that at the end of this section you get a grasp of;
 
 ## Task | Description
 ------- | -----------
+
 **`0-square_matrix_simple.py`** | Write a function that computes the square value of all integers of a matrix.
+
 **`2-uniq_add.py`** | Write a function that adds all unique integers in a list (only once for each integer).
 **`3-common_elements.py`** | Write a function that returns a set of common elements in two sets.
 **`4-only_diff_elements.py`** | Write a function that returns a set of all elements present in only one set.
