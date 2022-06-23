@@ -40,7 +40,7 @@ class Node:
         Raises:
             TypeError: if value is not integer
         """
-        if not type(value) is int:
+        if type(value) is not int:
             raise TypeError("data must be integer")
         else:
             self.__data = value
@@ -48,7 +48,7 @@ class Node:
     @property
     def next_node(self):
         """
-        Getter of the next_node
+        Getter of the __next_node
         Returns:
             next_node: a pointer to the next node
         """
@@ -63,10 +63,16 @@ class Node:
         Raises:
             TypeError: if value not node or None
         """
-        if not is instance(value, Node) and value is not None:
+        if value is not None and type(value) is not Node:
             raise TypeError("next_node must be a Node object")
-        else:
-            self.__next_node = value
+
+    def __str__(self):
+        """String representation of Node instance
+        Returns:
+            Formatted string representing the node
+        """
+        return str(self.__data)
+
 
 class SinglyLinkedList:
     """
@@ -81,28 +87,33 @@ class SinglyLinkedList:
         self.__head = None
 
     def __str__(self):
-        result = ""
+        """String representation of SinglyLinkedList instance
+        Returns:
+            Formatted string representing the linked list
+        """
+        string = ""
         tmp = self.__head
         while tmp is not None:
-            result += str(self.data)
-            result += '\n'
-            tmp = tmp.__next_node
-        return result
+            string += str(tmp)
+            if tmp.next_node is not None:
+                string += "\n"
+            tmp = tmp.next_node
+        return string
 
     def sorted_insert(self, value):
         """
         Inserts new Node into the correct sorted position
         """
-        if self.__head is None:
-            self.__head = Node(value)
-        else:
-            new_node = Node(value)
-            tmp = self.__head
-            while tmp is not None:
-                if tmp.__next_node is None:
-                    tmp.__next_node = new_node
-                    new_node.__next_node = None
-                if new_node.__data < tmp.__next_node.__data:
-                    new_node.__next_node = tmp.__next_node
-                    tmp.__next_node = new_node
-                tmp = tmp.__next_node
+        new = Node(value)
+        tmp = self.__head
+        if tmp is None or tmp.data >= value:
+            if tmp:
+                new.next_node = tmp
+            self.__head = new
+            return
+        while tmp.next_node is not None:
+            if tmp.next_node.data >= value:
+                break
+            tmp = tmp.next_node
+        new.next_node = tmp.next_node
+        tmp.next_node = new
