@@ -1,109 +1,66 @@
 #!/usr/bin/python3
-"""
-Singly linked list Module
+""" Singly linked list Module that defines a 'Square'
 """
 
 
-class Node:
+class Square():
+    """An empty definition of a 'Square'
     """
-    Node class
-    Attributes:
-        data (int): the data stored in the node
-        next_node (Node): a pointer to the next node
-            in the linked list
-    """
-    def __init__(self, data, next_node=None):
+    __size = True
+
+    def __init__(self, size=0, position=(0, 0)):
+        """ Instantiates a 'Square'
         """
-        Class initializer
-        Args:
-            data (int): the data stored in the node.
-            next_node (Node): a pointer to the next node
-        """
-        self.data = data
-        self.next_node = None
+        self.size = size
+        self.position = position
 
     @property
-    def data(self):
+    def size(self):
+        """" to retrieve it
         """
-        Getter of the attribute data
-        Returns:
-            data: the stored data
-        """
-        return self.__data
+        return self.__size
 
-    @data.setter
-    def data(self, value):
+    @size.setter
+    def size(self, size):
+        """to set it
         """
-        Setter of the attribure data
-        Args:
-            value (int): the given data
-        Raises:
-            TypeError: if value is not integer
-        """
-        if not type(value) is int:
-            raise TypeError("data must be integer")
-        else:
-            self.__data = value
+        if not isinstance(size, int):
+            raise TypeError("size must be an integer")
+        if size < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = size
 
     @property
-    def next_node(self):
+    def position(self):
+        """to retrieve it
         """
-        Getter of the next_node
-        Returns:
-            next_node: a pointer to the next node
-        """
-        return self.__next_node
+        return self.__position
 
-    @next_node.setter
-    def next_node(self, value):
+    @position.setter
+    def position(self, position):
+        """to set it
         """
-        Setter of the next_node
-        Args:
-            value (Node): a pointer to the next node
-        Raises:
-            TypeError: if value not node or None
+        if not (isinstance(position, tuple) and
+                len(position) == 2 and
+                isinstance(position[0], int) and
+                isinstance(position[1], int) and
+                position[0] >= 0 and
+                position[1] >= 0):
+            raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = position
+
+    def area(self):
+        """ returns the current 'Square' area
         """
-        if not isinstance(value, Node) and value is not None:
-            raise TypeError("next_node must be a Node object")
+        return self.__size ** 2
+
+    def my_print(self):
+        """that prints in stdout the 'Square' with the character #
+        """
+        if self.size:
+            print('\n' * self.position[1], end="")
+            print('\n'.join(
+                [' ' * self.position[0] + '#' * self.size] * self.size
+            ))
         else:
-            self.__next_node = value
-
-
-class SinglyLinkedList:
-    """
-    SiglyLinkedList defines the singly linked list
-    Attributes:
-        head (Node): a pointer to the singly linked list
-    """
-    def __init__(self):
-        """
-        Class initializer
-        """
-        self.__head = None
-
-    def __str__(self):
-        result = ""
-        tmp = self.__head
-        while tmp is not None:
-            result += str(self.data)
-            result += '\n'
-            tmp = tmp.__next_node
-        return result
-
-    def sorted_insert(self, value):
-        """
-        Inserts new Node into the correct soeted position
-        """
-        if self.__head is None:
-            self.__head = Node(value)
-        else:
-            new_node = Node(value)
-            tmp = self.__head
-            while tmp is not None:
-                if tmp.__next_node is None:
-                    tmp.__next_node = new_node
-                    new_node.__next_node = None
-                if new_node.__data < tmp.__next_node.__data:
-                    new_node.__next_node = tmp.__next_node
-                    tmp.__next_node = new_node
-                tmp = tmp.__next_node
+            print()
