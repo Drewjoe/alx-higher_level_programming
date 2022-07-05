@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 """ Prints x elements of a list.
+
+Args: my_list
+Returns: the real number of elements printed
+
+Note: x represents the number of elements to print
+    x can be bigger than the length of my_list
 """
 
 
